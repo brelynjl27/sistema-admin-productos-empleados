@@ -1,0 +1,315 @@
+<router-outlet>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminVision - Panel de Control</title>
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-light: #1e293b;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 10% 20%, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 90%);
+        }
+        
+        .admin-panel {
+            width: 100%;
+            max-width: 1200px;
+            background-color: rgba(15, 23, 42, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color:white;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .dashboard-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .card-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .card-desc {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .card-btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-block;
+        }
+        
+        /* Estilos específicos para cada tarjeta */
+        .card-products {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(30, 41, 59, 0.8));
+        }
+        
+        .card-products .card-icon {
+            background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+            color: white;
+        }
+        
+        .card-products .card-btn {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        
+        .card-products .card-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+        
+        .card-employees {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(30, 41, 59, 0.8));
+        }
+        
+        .card-employees .card-icon {
+            background: linear-gradient(135deg, var(--accent-green), #047857);
+            color: white;
+        }
+        
+        .card-employees .card-btn {
+            background-color: var(--accent-green);
+            color: white;
+        }
+        
+        .card-employees .card-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+        
+        .card-add-product {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(30, 41, 59, 0.8));
+        }
+        
+        .card-add-product .card-icon {
+            background: linear-gradient(135deg, var(--accent-purple), #7e22ce);
+            color: white;
+        }
+        
+        .card-add-product .card-btn {
+            background-color: var(--accent-purple);
+            color: white;
+        }
+        
+        .card-add-product .card-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+        
+        .card-add-employee {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(30, 41, 59, 0.8));
+        }
+        
+        .card-add-employee .card-icon {
+            background: linear-gradient(135deg, var(--accent-orange), #c2410c);
+            color: white;
+        }
+        
+        .card-add-employee .card-btn {
+            background-color: var(--accent-orange);
+            color: white;
+        }
+        
+        .card-add-employee .card-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+        
+        .card-reports {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(30, 41, 59, 0.8));
+        }
+        
+        .card-reports .card-icon {
+            background: linear-gradient(135deg, var(--accent-red), #b91c1c);
+            color: white;
+        }
+        
+        .card-reports .card-btn {
+            background-color: var(--accent-red);
+            color: white;
+        }
+        
+        .card-reports .card-btn:hover {
+            background-color: transparent;
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+        
+        .card-inventory {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(30, 41, 59, 0.8));
+        }
+        
+        .card-inventory .card-icon {
+            background: linear-gradient(135deg, #06b6d4, #0e7490);
+            color: white;
+        }
+        
+        .card-inventory .card-btn {
+            background-color: #06b6d4;
+            color: white;
+        }
+        
+        .card-inventory .card-btn:hover {
+            background-color: transparent;
+            border-color: #06b6d4;
+            color: #06b6d4;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-panel {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-panel">
+        <div class="header">
+            <h1>AdminVision - Control Total</h1>
+            <p>Gestiona tu tienda de televisores y parlantes de alta gama con nuestro panel administrativo integral</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card card-products">
+                <div class="card-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <h3 class="card-title">Gestion de Productos</h3>
+                <p class="card-desc">Administra tu inventario de televisores y sistemas de audio</p>
+                <a href="productos-lista" class="card-btn">Ver Productos</a>
+            </div>
+            
+            <div class="dashboard-card card-employees">
+                <div class="card-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3 class="card-title">Gestión de Empleados</h3>
+                <p class="card-desc">Controla el acceso y permisos de tu equipo de trabajo</p>
+                <a href="empleados-lista" class="card-btn">Ver Empleados</a>
+            </div>
+            
+            <div class="dashboard-card card-add-product">
+                <div class="card-icon">
+                    <i class="fas fa-plus-square"></i>
+                </div>
+                <h3 class="card-title">Agregar Producto</h3>
+                <p class="card-desc">Registra nuevos modelos de TV y parlantes al sistema</p>
+                <a href="productos-add" class="card-btn">Nuevo Producto</a>
+            </div>
+            
+            <div class="dashboard-card card-add-employee">
+                <div class="card-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3 class="card-title">Registrar Empleado</h3>
+                <p class="card-desc">Añade nuevos miembros a tu equipo de ventas</p>
+                <a href="empleados-add" class="card-btn">Nuevo Empleado</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+    
+</router-outlet>

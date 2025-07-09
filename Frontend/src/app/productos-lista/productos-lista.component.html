@@ -1,0 +1,150 @@
+<p></p>
+<div class="container">
+<h1><i>Tabla  de  Productos</i></h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Eliminar</th>
+          <th scope="col">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor ="let c of productos" >
+          <th scope="row"> {{c.id}} </th>
+          <td>{{c.nombre}}</td>
+          <td>{{c.marca}}</td>
+          <td>${{c.precio }}</td>
+          <td>{{c.cantidad}}</td>
+          <td><button class="btn btn-danger1" (click)="deleteProducto(c.id)">Eliminar</button> </td>
+          <td><button class="btn btn-danger2" (click)="editProducto(c.id)">Editar</button> </td>
+          
+        </tr>
+      </tbody>
+  </table>
+
+  
+<style>
+/* Estilos base mejorados */
+.container {
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  background: linear-gradient(135deg, #2c3e50, #4a6491);
+  text-align: center;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Estilos de tabla mejorados */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table thead {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.table thead th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  border-bottom: none;
+}
+
+/* Estilos para celdas de datos con fondo */
+.table tbody td {
+  padding: 12px 15px;
+  background-color: #f8f9fa; /* Fondo gris claro para celdas de datos */
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.table tbody th {
+  padding: 12px 15px;
+  background-color: #e9ecef; /* Fondo un poco más oscuro para la columna ID */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Efecto hover para filas */
+.table tbody tr:hover td {
+  background-color: #e1f0fa; /* Cambia al pasar el mouse */
+}
+
+/* Estilos para precios */
+.table tbody td:nth-child(4) {
+  font-weight: bold;
+  color: #218838; /* Verde para precios */
+  background-color: #e8f5e9; /* Fondo verde claro */
+}
+
+/* Estilos para botones mejorados */
+.btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+.btn-danger1 {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger1:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger2 {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-danger2:hover {
+  background-color: #0069d9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado entre botones */
+.btn + .btn {
+  margin-left: 8px;
+}
+</style>
+
+
