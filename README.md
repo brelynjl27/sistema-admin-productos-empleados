@@ -2,6 +2,8 @@
 
 Este es un proyecto web full-stack diseñado para la gestión de productos y empleados. La aplicación cuenta con un backend que expone una API REST, un frontend para la interacción del usuario y una base de datos relacional para la persistencia de datos.
 
+ ![Vista previa de la
+     aplicación](img/pagina_inicio.png)
 ## Tecnologías Utilizadas
 
 El proyecto está construido con las siguientes tecnologías:
